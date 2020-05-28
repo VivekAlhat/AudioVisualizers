@@ -5,6 +5,7 @@ var pieces,
   mapMouseX,
   mapMouseY,
   audio,
+  track,
   toggleBtn,
   uploadBtn,
   uploadedAudio,
@@ -14,6 +15,7 @@ var uploadLoading = false;
 
 function preload() {
   audio = loadSound("audio/Lost with You (feat. Ruby Chase).mp3");
+  track = audio.file;
 }
 
 function uploaded(file) {
@@ -37,15 +39,15 @@ function setup() {
 
   createCanvas(windowWidth, windowHeight);
 
-  toggleBtn = createButton("Play / Pause");
+  // toggleBtn = createButton("Play / Pause");
 
-  uploadBtn = createFileInput(uploaded);
+  // uploadBtn = createFileInput(uploaded);
 
-  uploadBtn.addClass("upload-btn");
+  // uploadBtn.addClass("upload-btn");
 
-  toggleBtn.addClass("toggle-btn");
+  // toggleBtn.addClass("toggle-btn");
 
-  toggleBtn.mousePressed(toggleAudio);
+  // toggleBtn.mousePressed(toggleAudio);
 
   analyzer = new p5.Amplitude();
   fft = new p5.FFT();
@@ -70,15 +72,9 @@ function draw() {
   var bass = fft.getEnergy(100, 150);
   var treble = fft.getEnergy(150, 250);
   var mid = fft.getEnergy("mid");
-
   var mapMid = map(mid, 0, 255, -100, 200);
-  var scaleMid = map(mid, 0, 255, 1, 1.5);
-
   var mapTreble = map(treble, 0, 255, 200, 350);
-  var scaleTreble = map(treble, 0, 255, 0, 1);
-
   var mapbass = map(bass, 0, 255, 50, 200);
-  var scalebass = map(bass, 0, 255, 0.05, 1.2);
 
   mapMouseX = map(mouseX, 0, width, 1, 50);
   mapMouseXbass = map(mouseX, 0, width, 1, 5);

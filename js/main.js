@@ -15,7 +15,6 @@ var uploadLoading = false;
 
 function preload() {
   audio = loadSound("audio/Lost with You (feat. Ruby Chase).mp3");
-  track = audio.file;
 }
 
 function uploaded(file) {
@@ -39,15 +38,15 @@ function setup() {
 
   createCanvas(windowWidth, windowHeight);
 
-  // toggleBtn = createButton("Play / Pause");
+  toggleBtn = createButton("Play / Pause");
 
-  // uploadBtn = createFileInput(uploaded);
+  uploadBtn = createFileInput(uploaded);
 
-  // uploadBtn.addClass("upload-btn");
+  uploadBtn.addClass("upload-btn");
 
-  // toggleBtn.addClass("toggle-btn");
+  toggleBtn.addClass("toggle-btn");
 
-  // toggleBtn.mousePressed(toggleAudio);
+  toggleBtn.mousePressed(toggleAudio);
 
   analyzer = new p5.Amplitude();
   fft = new p5.FFT();

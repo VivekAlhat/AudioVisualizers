@@ -92,14 +92,14 @@ function draw() {
     stroke(colorPalette[1]);
     rotate(frameCount * 0.002);
     strokeWeight(0.5);
-    polygon(mapbass + i, mapbass - i, mapMouseXbass * i, 3);
+    star(mapbass + i, mapbass - i, mapMouseXbass * i, 3, 2);
     pop();
 
     /*----------  MID  ----------*/
     push();
     stroke(colorPalette[2]);
     strokeWeight(0.2);
-    polygon(mapMid + i / 2, mapMid - i * 2, mapMouseX * i, 7);
+    line(mapMid + i / 2, mapMid - i * 2, mapMouseX * i, 7);
     pop();
 
     /*----------  TREMBLE  ----------*/
@@ -108,7 +108,7 @@ function draw() {
     strokeWeight(0.6);
     scale(mouseX * 0.0005);
     rotate(mouseX * 0.002);
-    polygon(mapTreble + i / 2, mapTreble - i / 2, (mapMouseY * i) / 2, 3);
+    ellipse(mapTreble + i / 2, mapTreble - i / 2, (mapMouseY * i) / 2, 3);
     pop();
   }
 }
@@ -129,8 +129,23 @@ function polygon(x, y, radius, npoints) {
   var angle = TWO_PI / npoints;
   beginShape();
   for (var a = 0; a < TWO_PI; a += angle) {
-    var sx = x + cos(a) * radius;
-    var sy = y + sin(a) * radius;
+    var sx = x + (cos(a) * radius) / 2;
+    var sy = y + (sin(a) * radius) / 2;
+    vertex(sx, sy);
+  }
+  endShape(CLOSE);
+}
+
+function star(x, y, radius1, radius2, npoints) {
+  let angle = TWO_PI / npoints;
+  let halfAngle = angle / 2.0;
+  beginShape();
+  for (let a = 0; a < TWO_PI; a += angle) {
+    let sx = x + cos(a) * radius2;
+    let sy = y + sin(a) * radius2;
+    vertex(sx, sy);
+    sx = x + cos(a + halfAngle) * radius1;
+    sy = y + sin(a + halfAngle) * radius1;
     vertex(sx, sy);
   }
   endShape(CLOSE);
